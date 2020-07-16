@@ -1,0 +1,16 @@
+{
+  "name": "mpbc",
+  "version": "1.0.0",
+  "description": "app for customers of Manhattan Project Beer Co",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.24"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
