@@ -1,0 +1,90 @@
+<h1>admin</h1>
+
+<button onclick="fetchSales()">Fetch Sales</button>
+<img id="loadingSalesFetch" style="visibility: hidden; height:20px;" src="/img/loading.gif" alt="">
+
+
+<button onclick="transferSales()">Transfer Sales</button>
+<img id="loadingSalesTransfer" style="visibility: hidden; height:20px;" src="/img/loading.gif" alt="">
+
+<button onclick="cleanSales()">Clean Sales</button>
+<img id="loadingSalesClean" style="visibility: hidden; height:20px;" src="/img/loading.gif" alt="">
+<div id="actionResponse"></div>
+
+<script>
+    const messages = [];
+    
+    const fetchSales = () => {
+        console.log('fetchSales()')
+        const salesDataApi = '/api/fetch/fullclip/sales'
+        const loading = document.getElementById('loadingSalesFetch')
+        loading.style.visibility = "visible" 
+        //call api
+        fetch(salesDataApi)
+            .then((res) => {
+                if( res.status !== 201) {
+                    loading.style.visibility = "hidden"
+                    let message = 'Looks like there was an issue. Status Code: ' + res.status
+                    console.log(message);
+                    messages.push(message);
+                    respondToClient();
+                    return;
+                }
+
+                res.json().then((data) => {
+                    loading.style.visibility = "hidden"
+                    console.log('data: ', data)
+                    messages.push(data.result.fetchedData.length + ' transaction(s) retrieved')
+                    respondToClient()
+                })
+            })
+    }
+
+    const transferSales = () => {
+        console.log('transferSales()')
+        const salesTransferApi = 'api/transfer/sales'
+        const loading = document.getElementById('loadingSalesTransfer')
+        loading.style.visibility = 'visible'
+
+        fetch(salesTransferApi)
+            .then((res) => {
+                if (res.status !== 201) {
+                    loading.style.visibility = 'hidden';
+                    messages.push('Looks like there was an issue. Status Code: ' + res.status);
+                    respondToClient();
+                    return;
+                }
+
+                res.json().then((data) => {
+                    loading.style.visibility = "hidden"
+                    console.log('data: ', data)
+                    messages.push(data.records[0].upserted.length + ' transaction(s) upserted.')
+                    respondToClient()
+                })
+            })
+    }
+
+    const cleanSales = () => {
+        console.log('cleanSales()')
+        const salesCleanApi = 'api/clean/sales'
+        const loading = document.getElementById('loadingSalesClean')
+        loading.style.visibility = 'visible'
+
+        fetch(salesCleanApi)
+            .then((res) => {
+                if (res.status !== 201) {
+                    loading.style.visibility = 'hidden';
+                    messages.push('Looks like there was an issue. Status Code: ' + res.status);
+                    respondToClient();
+                    return;
+                }
+
+                res.json().then((data) => {
+                    loading.style.visibility = "hidden"
+                    console.log('data: ', data)
+                    messages.push(data.records[0].upserted.length + ' transaction(s) upserted.')
+                    respondToClient()
+                })
+            })
+    }
+</script>
