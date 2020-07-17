@@ -1,10 +1,9 @@
-const envars = require('../../envars');
 
 /**
  * Created by karl on 9/15/2018.
  */
 const envars = require('../../envars')
-const googleMapsClient = require('@google/maps').createClient({
+const googleMapsClient = require('@googlemaps/google-maps-services-js').createClient({
   //TODO move to env var
     key: envars.googleKey,
     Promise: Promise

@@ -4,6 +4,7 @@
   "description": "app for customers of Manhattan Project Beer Co",
   "main": "index.js",
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.1.4",
     "@meanie/mongoose-upsert-many": "^2.1.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
